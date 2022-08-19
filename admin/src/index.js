@@ -51,12 +51,14 @@ app.get("/investments/:id", async (req, res) => {
   }
 })
 
-app.listen(config.port, (err) => {
-  if (err) {
-    console.error("Error occurred starting the server", err)
-    process.exit(1)
-  }
-  console.log(`Server running on port ${config.port}`)
-})
+if (!module.parent) {
+  app.listen(config.port, (err) => {
+    if (err) {
+      console.error("Error occurred starting the server", err)
+      process.exit(1)
+    }
+    console.log(`Server running on port ${config.port}`)
+  })
+}
 
 module.exports = app
